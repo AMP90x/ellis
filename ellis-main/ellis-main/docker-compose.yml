@@ -1,0 +1,13 @@
+services:
+  api:
+    build: .
+    container_name: ellis-api
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mapeia o diretório atual para /app no container.
+      # Isso garante que o banco de dados (escola.db) seja salvo no seu computador.
+      - .:/app
+    # Sobrescreve o comando do Dockerfile para habilitar o reload (útil para desenvolvimento)
+    command: uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+    restart: always
