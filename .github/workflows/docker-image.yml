@@ -7,16 +7,17 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-# Aqui está o segredo: indica onde o Docker deve olhar
+    - name: Checkout do código
+      uses: actions/checkout@v4
+
+    - name: Build da Imagem Docker
+      uses: docker/build-push-action@v5
+      with:
+        # Aqui está o segredo: indica onde o Docker deve olhar
         context: ./ellis-main 
         file: ./ellis-main/Dockerfile
         push: false
